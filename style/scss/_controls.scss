@@ -1,0 +1,28 @@
+.controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $grey;
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controls-label {
+    float: left;
+    font-weight: 200;
+    line-height: 100px;
+    text-transform: uppercase;
+    padding-right: 30px;
+}
+
+.card-slot {
+    background: white;
+    border: none;
+    padding: 5px 20px;
+    font-weight: bold;
+    border-radius: 2px;
+}

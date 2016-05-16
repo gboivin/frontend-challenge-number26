@@ -1,0 +1,208 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,900);
+header {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  text-align: center; }
+  header .svg-logo {
+    height: 80px;
+    width: auto; }
+  header.center {
+    top: 30vh;
+    height: 100%; }
+    header.center .svg-logo {
+      height: 130px; }
+
+header.center h1 {
+  opacity: 1; }
+
+h1 {
+  opacity: 0;
+  font-size: 1em;
+  font-style: italic;
+  transition: opacity .4s top .3s;
+  -webkit-transition: opacity 2s;
+  -moz-transition: opacity 2s; }
+
+.instruction {
+  position: fixed;
+  color: white;
+  left: 0;
+  right: 0;
+  top: 60vh;
+  background: #66cdcc;
+  padding: 20px 0; }
+  .instruction.error {
+    background: #F44336; }
+  .instruction h2 {
+    display: inline-block; }
+
+.controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ECEFF1;
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.controls-label {
+  float: left;
+  font-weight: 200;
+  line-height: 100px;
+  text-transform: uppercase;
+  padding-right: 30px; }
+
+.card-slot {
+  background: white;
+  border: none;
+  padding: 5px 20px;
+  font-weight: bold;
+  border-radius: 2px; }
+
+#keypad {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: 30px;
+  border: 2px solid white;
+  border-radius: 3px; }
+  #keypad button {
+    width: calc(100%/3);
+    padding: 5px;
+    background: white;
+    border-radius: 0;
+    border: 1px solid #ECEFF1;
+    margin: 0; }
+    #keypad button.cancel {
+      background: #F44336;
+      color: white; }
+    #keypad button.clear {
+      background: #FFEB3B; }
+    #keypad button.validate {
+      width: 100%;
+      padding: 10px 0;
+      color: white;
+      background: #388E3C; }
+
+.input-wrapper {
+  position: relative;
+  display: inline-block; }
+  .input-wrapper .error-msg {
+    position: absolute;
+    right: -200px;
+    line-height: 57px;
+    font-weight: 200; }
+
+.select {
+  position: fixed;
+  top: 0;
+  bottom: 180px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .select input {
+    margin-top: 45px;
+    margin-left: 0; }
+  .select .error-msg {
+    color: #F44336;
+    left: 0;
+    right: 0;
+    top: 100%; }
+
+.choices {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+  .choices.left {
+    left: 0; }
+    .choices.left span {
+      border-radius: 0 2px 2px 0; }
+  .choices.right {
+    right: 0; }
+    .choices.right span {
+      border-radius: 2px 0 0 2px; }
+  .choices span {
+    background: #66cdcc;
+    display: inline-block;
+    color: white;
+    padding: 10px 30px;
+    font-size: 40px;
+    cursor: pointer; }
+    .choices span::after {
+      content: "€";
+      padding-left: 5px; }
+
+body {
+  font-family: Lato;
+  color: #434343;
+  text-align: center;
+  -webkit-font-smoothing: antialiased; }
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+button {
+  cursor: pointer;
+  background: white;
+  border-radius: 2px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border: none;
+  padding: 5px 20px;
+  margin: 0 5px; }
+
+h2 {
+  font-weight: 300;
+  letter-spacing: .02em;
+  font-size: 3em;
+  margin: 0; }
+
+.card {
+  background: white;
+  height: 40px;
+  width: 60px;
+  display: inline-block;
+  border-radius: 4px;
+  position: relative;
+  margin-left: 20px;
+  top: 5px; }
+
+.card::after {
+  content: " ";
+  background: rgba(0, 0, 0, 0.48);
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 8px; }
+
+input {
+  margin-left: 30px;
+  height: 57px;
+  vertical-align: bottom;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  width: 200px;
+  font-size: 45px;
+  text-align: center;
+  color: #434343;
+  border-radius: 4px; }
+
+/*# sourceMappingURL=app.css.map */

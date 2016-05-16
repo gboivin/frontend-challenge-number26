@@ -1,0 +1,80 @@
+@import 'fonts';
+@import 'variables';
+@import 'mixins';
+@import 'header';
+@import 'instruction';
+@import 'controls';
+@import 'keypad';
+@import 'pin';
+@import 'selectAmount';
+
+body {
+    font-family: Lato;
+    color: $black;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+button {
+    cursor: pointer;
+    background: white;
+    border-radius: 2px;
+    font-weight: bold;
+    text-transform: capitalize;
+    border: none;
+    padding: 5px 20px;
+    margin: 0 5px;
+}
+
+h2 {
+    font-weight: 300;
+    letter-spacing: .02em;
+    font-size: 3em;
+    margin: 0;
+}
+
+.card {
+    background: white;
+    height: 40px;
+    width: 60px;
+    display: inline-block;
+    border-radius: 4px;
+    position: relative;
+    margin-left: 20px;
+    top: 5px;
+}
+
+.card::after {
+    content: " ";
+    background: rgba(0, 0, 0, 0.48);
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 8px;
+}
+
+input {
+    margin-left: 30px;
+    height: 57px;
+    vertical-align: bottom;
+    border: 2px solid rgba(0,0,0,.2);
+    width: 200px;
+    font-size: 45px;
+    text-align: center;
+    color: $black;
+    border-radius: 4px;
+}
+

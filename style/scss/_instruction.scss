@@ -1,0 +1,17 @@
+.instruction {
+    position: fixed;
+    color: white;
+    left:0;
+    right:0;
+    top: 60vh;
+    background: $blue;
+    padding: 20px 0;
+
+    &.error {
+        background: $red;
+    }
+
+    h2 {
+        display: inline-block;
+    }
+}

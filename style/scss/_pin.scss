@@ -1,0 +1,10 @@
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+    .error-msg {
+        position: absolute;
+        right: -200px;
+        line-height: 57px;
+        font-weight: 200;
+    }
+}
