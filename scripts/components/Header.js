@@ -5,7 +5,7 @@ const Header = React.createClass({
     render: function() {
         let title = "Europe's most modern bank";
         return(
-            <header className={this.props.atm.state.currentStep.view != 'SelectAmount' ? 'center' : ''}>
+            <header className={'atm-header ' + (this.props.atm.state.currentStep.view != 'SelectAmount' ? 'center' : '')}>
                 <img  className="svg-logo" src="images/logo.svg"/>
                 <h1>{title}</h1>
             </header>
