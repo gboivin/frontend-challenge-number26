@@ -30074,6 +30074,9 @@
 
 	    //Moves App to next step
 	    next: function () {
+	        this.setState({
+	            waiting: false
+	        });
 	        let currentIndex = this.getCurrentStepIndex();
 	        if (currentIndex < this.state.steps.length - 1) {
 	            if (this.viewIs('SelectAmount')) {
@@ -30110,6 +30113,9 @@
 
 	    //Calls current steps validation (called when click on validate)
 	    validate: function () {
+	        this.setState({
+	            waiting: true
+	        });
 	        setTimeout(this.state.currentStep.validate, 3000);
 	    },
 
@@ -30158,7 +30164,8 @@
 	        if (this.state.PIN != 1234) {
 	            this.setState({
 	                error: 'Oops wrong PIN! Try again',
-	                PIN: ''
+	                PIN: '',
+	                waiting: false
 	            });
 	            //Else move to next step
 	        } else {
@@ -30195,7 +30202,8 @@
 	        if (error) {
 	            this.setState({
 	                error: error,
-	                amount: ''
+	                amount: '',
+	                waiting: false
 	            });
 	            //Else move to next step
 	        } else {
@@ -30217,6 +30225,15 @@
 	    //Render view according to current step
 	    render: function () {
 	        let view = '';
+	        let waiting = this.state.waiting ? React.createElement(
+	            'div',
+	            { className: 'wait' },
+	            React.createElement(
+	                'span',
+	                null,
+	                'Please wait...'
+	            )
+	        ) : '';
 	        switch (this.state.currentStep.view) {
 	            case 'InsertCard':
 	                view = React.createElement(InsertCard, { hasCard: this.state.hasCard });
@@ -30240,6 +30257,7 @@
 	        return React.createElement(
 	            'main',
 	            null,
+	            waiting,
 	            React.createElement(Header, { atm: this }),
 	            view,
 	            React.createElement(Actions, { atm: this, step: this.state.currentStep })

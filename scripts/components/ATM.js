@@ -74,6 +74,9 @@ const ATM = React.createClass({
 
     //Moves App to next step
     next: function() {
+        this.setState({
+            waiting: false
+        });
         let currentIndex = this.getCurrentStepIndex();
         if(currentIndex < this.state.steps.length -1) {
             if (this.viewIs('SelectAmount')) {
@@ -110,6 +113,9 @@ const ATM = React.createClass({
 
     //Calls current steps validation (called when click on validate)
     validate: function() {
+         this.setState({
+            waiting: true
+         });
          setTimeout(this.state.currentStep.validate, 3000);
     },
 
@@ -158,7 +164,8 @@ const ATM = React.createClass({
         if (this.state.PIN != 1234) {
             this.setState({
                 error: 'Oops wrong PIN! Try again',
-                PIN: ''
+                PIN: '',
+                waiting: false,
             });
         //Else move to next step
         } else {
@@ -196,7 +203,8 @@ const ATM = React.createClass({
         if (error) {
             this.setState({
                 error: error,
-                amount: ''
+                amount: '',
+                waiting: false
             });
         //Else move to next step
         } else {
@@ -218,6 +226,7 @@ const ATM = React.createClass({
     //Render view according to current step
     render: function() {
         let view = '';
+        let waiting = this.state.waiting ? <div className='wait'><span>Please wait...</span></div> : '';
         switch(this.state.currentStep.view) {
             case 'InsertCard':
                 view = <InsertCard hasCard={this.state.hasCard}/>;
@@ -240,6 +249,7 @@ const ATM = React.createClass({
         }
         return (
             <main>
+                {waiting}
                 <Header atm={this}/>
                 {view}
                 <Actions atm={this} step={this.state.currentStep}/>
