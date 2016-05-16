@@ -11,6 +11,7 @@ My main goal was to make nice, minimalistic ATM, easy to use and following the g
   - Babel (for JSX)
   - React
   - JQuery
+  - Webpack for JS structure
 
 ## Implementation
 I used React to implement this ATM which means the templates are contained in the JS as JSX. I divided my app in React components as follows:
