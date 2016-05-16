@@ -1,6 +1,6 @@
 # Number 26 frontend challenge
 
-You can view the live project here: http://gboivin.github.io/frontend-challenge-number26
+You can view the live project here: http://gboivin.github.io/frontend-challenge-number26, or simply run a web server (python -m SimpleHTTPServer then http://localhost:8000)
 
 ## Goal/Idea
 
