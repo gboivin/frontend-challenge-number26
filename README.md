@@ -5,6 +5,13 @@ You can view the live project here: http://gboivin.github.io/frontend-challenge-
 ## Goal/Idea
 
 My main goal was to make nice, minimalistic ATM, easy to use and following the general style and color scheme of Number 26.
+
+## Technologies used:
+  - Sass
+  - Babel (for JSX)
+  - React
+  - JQuery
+
 ## Implementation
 I used React to implement this ATM which means the templates are contained in the JS as JSX. I divided my app in React components as follows:
  - App
@@ -44,9 +51,9 @@ You need to click on the back button of the browser to go back to previous step.
 
 A click on the clear button on the keypad will empty the input, whereas a click on the cancel button will present the user with a goodbye screen and be prompter to take his card back.
 
+## Known issues
+- I developed this ATM for modern browsers, more specifically the ones supporting flexbox (http://caniuse.com/#feat=flexbox), it probably won't work On IE
+- By using the back button or accessing directly a URL with a hash you can run into some flow issues (no card in the atm if you skip first step so you will see on goodbye page "Insert card" instead of take card).
 
-## Technologies used:
-  - Sass
-  - Babel (for JSX)
-  - React
-  - JQuery
+Thanks for reading!
+
