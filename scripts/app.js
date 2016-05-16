@@ -8,7 +8,7 @@ const ATM = React.createClass({
          * and finally some booleans to define if the keypad or cardslot should be visible at this step 
         */
 
-        var steps = [{
+        let steps = [{
             view: 'InsertCard',
             showCardSlot: true,
         }, {
@@ -37,11 +37,12 @@ const ATM = React.createClass({
             showCardSlot: true
         }];
 
-        var currentStep = this.getCurrentStep(steps);
+        let currentStep = this.getCurrentStep(steps);
 
         return {steps: steps, currentStep: currentStep, PIN: '', amount: ''};
     },
 
+    //Once component is mounted, watch hash changes to load right step
     componentDidMount: function() {
         $(window).on('hashchange', function(a) {
             this.setState({
@@ -50,12 +51,20 @@ const ATM = React.createClass({
         }.bind(this));
     },
 
+    //Gets current step index
+    getCurrentStepIndex: function() {
+        return this.state.steps.map(function(step) { return step.view; }).indexOf(this.state.currentStep.view); 
+    },
+
+    //Gets current step from hash or first one in case no hash is present
     getCurrentStep: function(steps) {
-        var stepFromHash = $.grep(steps, function(step) { return step.view === window.location.hash.slice(1); });
+        let stepFromHash = $.grep(steps, function(step) { return step.view === window.location.hash.slice(1); });
         return stepFromHash.length ? stepFromHash[0] : steps[0];
     },
+
+    //Moves App to next step
     next: function() {
-        var currentIndex = this.getCurrentStepIndex();
+        let currentIndex = this.getCurrentStepIndex();
         if(currentIndex < this.state.steps.length -1) {
             if (this.viewIs('SelectAmount')) {
                 //Set timeout for end of wait
@@ -64,17 +73,22 @@ const ATM = React.createClass({
             this.setCurrentView(currentIndex + 1);
         }
     },
+
+    //Moves App to prev step
     prev: function() {
-        var newIndex = this.getCurrentStepIndex() -1;
+        let newIndex = this.getCurrentStepIndex() -1;
         if (newIndex == 0) {
             this.clear();
         }
         this.setCurrentView(newIndex);
     },
+
+    //Set hash to current view
     setCurrentView: function(index) {
         window.location.hash = '#' + this.state.steps[index].view
     },
-
+    
+    // Called Whenever client clicks on button "Cancel", offer client to take his card
     abort: function() {
         this.setState({
             currentStep: {
@@ -84,14 +98,12 @@ const ATM = React.createClass({
         });
     },
 
+    //Calls current steps validation (called when click on validate)
     validate: function() {
          setTimeout(this.state.currentStep.validate, 3000);
     },
 
-    wait: function() {
-
-    },
-
+    //Clears inputted info
     clear: function() {
         this.setState({
             amount: '',
@@ -99,42 +111,55 @@ const ATM = React.createClass({
         });
     },
 
+    //Resets app to default state
     reset: function() {
         this.clear();
         this.setCurrentView(0);
     },
 
+    //Handle input on keypad
     input: function(key, reset) {
         this.setState({error: ''});
         this.state.currentStep.input(key, reset);
     },
 
+    //Helper function that returns true if current view is passed as param
     viewIs: function(view) {
         return this.state.currentStep.view === view;
     },
 
+    //Handle change of PIN, includes validation of PIN format
     updatePIN: function(value) {
-        var newValue = value ? this.state.PIN + value : '';
+        let newValue = value ? this.state.PIN + value : '';
         if (!this.validatePINFormat(newValue)) return;
         this.setState({
             PIN: newValue
         });
     },
 
+    //Validate that PIN must be a number less than 5 chars
+    validatePINFormat: function(PIN) {
+        return !PIN || Number.isInteger(parseInt(PIN)) && PIN.length <= 4;
+    },
+
+    //Validate PIN
     validatePIN: function() {
-        //Simulate AJAX CALL TO CHECK PIN
+        //Show error if PIN is wrong
         if (this.state.PIN != 1234) {
             this.setState({
                 error: 'Oops wrong PIN! Try again',
                 PIN: ''
             });
+        //Else move to next step
         } else {
             this.next();
         }
     },
 
+    //Handle update of amount
     updateAmount: function(value, reset) {
-        var newValue;
+        let newValue;
+        //If one of the choices are clicked instead of using keypad, don't append value
         if (reset) {
             newValue = value;
         } else {
@@ -145,8 +170,9 @@ const ATM = React.createClass({
         });
     },
 
+    //Validate amount inputted
     validateAmount: function() {
-        var error;
+        let error;
         let amount = parseInt(this.state.amount);
         if (!amount) {
             error='Please enter an amount';
@@ -156,31 +182,19 @@ const ATM = React.createClass({
         } else if (amount % 10 !== 0) {
             error = 'The amount has to be a multiple of 10';
         }
-
+        //Show error if any
         if (error) {
             this.setState({
                 error: error,
                 amount: ''
             });
+        //Else move to next step
         } else {
             this.next();
         }
     },
 
-    validatePINFormat: function(PIN) {
-        return !PIN || Number.isInteger(parseInt(PIN)) && PIN.length <= 4;
-    },
-
-    setAmount: function(value) {
-        this.setState({
-            amount: value
-        });
-    },
-
-    getCurrentStepIndex: function() {
-        return this.state.steps.map(function(step) { return step.view; }).indexOf(this.state.currentStep.view); 
-    },
-
+    //Handle inserting or taking back card
     handleCardAction: function () {
         if (!this.state.hasCard) {
             this.next();
@@ -191,6 +205,7 @@ const ATM = React.createClass({
         this.setState({hasCard: !this.state.hasCard});
     },
 
+    //Render view according to current step
     render: function() {
         let view = '';
         switch(this.state.currentStep.view) {
@@ -223,9 +238,10 @@ const ATM = React.createClass({
     }
 });
 
+/** Header **/
 const Header = React.createClass({
     render: function() {
-        var title = "Europe's most modern bank";
+        let title = "Europe's most modern bank";
         return(
             <header className={this.props.atm.state.currentStep.view != 'SelectAmount' ? 'center' : ''}>
                 <img  className="svg-logo" src="images/logo.svg"/>
@@ -235,6 +251,7 @@ const Header = React.createClass({
     } 
 });
 
+/** InsertCard **/
 const InsertCard = React.createClass({
     render: function() {
         return(
@@ -245,7 +262,7 @@ const InsertCard = React.createClass({
     }
 });
 
-
+/** Instruction **/
 const Instruction = React.createClass({
     getInitialState: function() {
         return {error : ''}
@@ -262,9 +279,10 @@ const Instruction = React.createClass({
     }
 });
 
+/** Abort **/
 const Abort = React.createClass({
     render: function() {
-        var text = "Ciao! Don't forget your"
+        let text = "Ciao! Don't forget your"
         return (
             <Instruction>
                 <h2>{text}</h2><span className="card"></span>
@@ -273,6 +291,7 @@ const Abort = React.createClass({
     }
 });
 
+/** PIN **/
 const PIN = React.createClass({
     getInitialState: function() {
         return {PIN: this.props.PIN, error: false};
@@ -282,7 +301,7 @@ const PIN = React.createClass({
     },
 
     render: function() {
-        var error = this.state.error ? <span className='error-msg'>{this.state.error}</span> : false
+        let error = this.state.error ? <span className='error-msg'>{this.state.error}</span> : false
         return(
             <Instruction error={this.state.error}>
                 <div className='input-wrapper'>
@@ -294,6 +313,7 @@ const PIN = React.createClass({
     }
 });
 
+/** SelectAmount **/
 const SelectAmount = React.createClass({
     getInitialState: function() {
         return {
@@ -305,7 +325,7 @@ const SelectAmount = React.createClass({
         this.setState(nextProps);
     },
     handleClick: function(e) {
-        var amount = $(e.target).text();
+        let amount = $(e.target).text();
         this.props.atm.input(amount, true)
     },
     render: function() {
@@ -331,6 +351,7 @@ const SelectAmount = React.createClass({
     }
 });
 
+/** Wait **/
 const Wait = React.createClass({
     render: function() {
         return (
@@ -339,19 +360,21 @@ const Wait = React.createClass({
             </Instruction>
         );
     }
-})
+});
 
+/** Money **/
 const Money = React.createClass({
     render: function() {
-        var text = "Ciao! Don't forget your card and money!";
+        let text = "Ciao! Don't forget your card and money!";
         return (
             <Instruction>
                 <h2>{text}</h2>
             </Instruction>
         );
     }
-})
+});
 
+/** Actions **/
 const Actions = React.createClass({
     getInitialState: function() {
         return {step: this.props.step};
@@ -360,7 +383,7 @@ const Actions = React.createClass({
         this.setState(nextProps);
     },
     render: function() {
-        var view = false;
+        let view = false;
         if (this.state.step.showKeypad == true) {
             view = <Keypad atm={this.props.atm}/>;
         }
@@ -379,9 +402,10 @@ const Actions = React.createClass({
     }
 });
 
+/** Keypad **/
 const Keypad = React.createClass({
     handleClick: function(e) {
-        var key = $(e.target).text();
+        let key = $(e.target).text();
         switch (key) {
             case 'cancel':
                 this.props.atm.abort();
@@ -397,16 +421,16 @@ const Keypad = React.createClass({
         }
     },
     render: function() {
-        var numbers = [];
-        var buttons =[];
-        for (var i = 1; i < 10; i++) {
+        let numbers = [];
+        let buttons =[];
+        for (let i = 1; i < 10; i++) {
             buttons.push(i); 
         };
         buttons.push(0);
 
-        var controlKeys = ['clear', 'cancel', 'validate'];
+        let controlKeys = ['clear', 'cancel', 'validate'];
 
-        var view = buttons.concat(controlKeys).map(function(text, i) {
+        let view = buttons.concat(controlKeys).map(function(text, i) {
             return <button className={!parseInt(text) ? text : ''} onClick={this.handleClick} key={i}>{text}</button>;
         }.bind(this));
 
@@ -418,6 +442,7 @@ const Keypad = React.createClass({
     }
 });
 
+/** CardSlot **/
 const CardSlot = React.createClass({
     render: function() {
         return (
@@ -428,6 +453,8 @@ const CardSlot = React.createClass({
     }
 })
 
+
+//Render React App to browser
 ReactDOM.render(
     <ATM />,
     document.getElementById('atm')        
