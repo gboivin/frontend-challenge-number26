@@ -30263,7 +30263,7 @@
 	        let title = "Europe's most modern bank";
 	        return React.createElement(
 	            'header',
-	            { className: this.props.atm.state.currentStep.view != 'SelectAmount' ? 'center' : '' },
+	            { className: 'atm-header ' + (this.props.atm.state.currentStep.view != 'SelectAmount' ? 'center' : '') },
 	            React.createElement('img', { className: 'svg-logo', src: 'images/logo.svg' }),
 	            React.createElement(
 	                'h1',
