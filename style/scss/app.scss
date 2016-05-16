@@ -1,11 +1,10 @@
 @import 'fonts';
 @import 'variables';
-@import 'mixins';
 @import 'header';
 @import 'instruction';
 @import 'controls';
 @import 'keypad';
-@import 'pin';
+@import 'inputWrapper';
 @import 'selectAmount';
 
 body {
@@ -45,6 +44,18 @@ h2 {
     margin: 0;
 }
 
+input {
+    margin-left: 30px;
+    height: 57px;
+    vertical-align: bottom;
+    border: 2px solid rgba(0,0,0,.2);
+    width: 200px;
+    font-size: 45px;
+    text-align: center;
+    color: $black;
+    border-radius: 4px;
+}
+
 .card {
     background: white;
     height: 40px;
@@ -64,17 +75,5 @@ h2 {
     left: 0;
     right: 0;
     height: 8px;
-}
-
-input {
-    margin-left: 30px;
-    height: 57px;
-    vertical-align: bottom;
-    border: 2px solid rgba(0,0,0,.2);
-    width: 200px;
-    font-size: 45px;
-    text-align: center;
-    color: $black;
-    border-radius: 4px;
 }
 

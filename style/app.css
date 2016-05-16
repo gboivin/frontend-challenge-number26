@@ -1,30 +1,27 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,700,900);
-header {
+.atm-header {
   position: fixed;
   top: 50px;
   left: 0;
   right: 0;
   text-align: center; }
-  header .svg-logo {
+  .atm-header .svg-logo {
     height: 80px;
     width: auto; }
-  header.center {
+  .atm-header.center {
     top: 30vh;
     height: 100%; }
-    header.center .svg-logo {
+    .atm-header.center .svg-logo {
       height: 130px; }
+  .atm-header h1 {
+    opacity: 0;
+    font-size: 1em;
+    font-style: italic;
+    transition: opacity .4s top .3s; }
 
-header.center h1 {
+.atm-header.center h1 {
   opacity: 1; }
-
-h1 {
-  opacity: 0;
-  font-size: 1em;
-  font-style: italic;
-  transition: opacity .4s top .3s;
-  -webkit-transition: opacity 2s;
-  -moz-transition: opacity 2s; }
 
 .instruction {
   position: fixed;
@@ -33,7 +30,8 @@ h1 {
   right: 0;
   top: 60vh;
   background: #66cdcc;
-  padding: 20px 0; }
+  padding: 20px 0;
+  transition: background .2s; }
   .instruction.error {
     background: #F44336; }
   .instruction h2 {
@@ -44,7 +42,7 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #ECEFF1;
+  background: #CFD8DC;
   color: white;
   padding: 20px 30px;
   display: flex;
@@ -76,7 +74,7 @@ h1 {
     padding: 5px;
     background: white;
     border-radius: 0;
-    border: 1px solid #ECEFF1;
+    border: 1px solid #CFD8DC;
     margin: 0; }
     #keypad button.cancel {
       background: #F44336;
@@ -175,6 +173,17 @@ h2 {
   font-size: 3em;
   margin: 0; }
 
+input {
+  margin-left: 30px;
+  height: 57px;
+  vertical-align: bottom;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  width: 200px;
+  font-size: 45px;
+  text-align: center;
+  color: #434343;
+  border-radius: 4px; }
+
 .card {
   background: white;
   height: 40px;
@@ -193,16 +202,5 @@ h2 {
   left: 0;
   right: 0;
   height: 8px; }
-
-input {
-  margin-left: 30px;
-  height: 57px;
-  vertical-align: bottom;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  width: 200px;
-  font-size: 45px;
-  text-align: center;
-  color: #434343;
-  border-radius: 4px; }
 
 /*# sourceMappingURL=app.css.map */
