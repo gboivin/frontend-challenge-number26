@@ -30228,10 +30228,11 @@
 	        let waiting = this.state.waiting ? React.createElement(
 	            'div',
 	            { className: 'wait' },
+	            React.createElement('span', { className: 'ball' }),
 	            React.createElement(
 	                'span',
-	                null,
-	                'Please wait...'
+	                { className: 'text' },
+	                'Please wait'
 	            )
 	        ) : '';
 	        switch (this.state.currentStep.view) {

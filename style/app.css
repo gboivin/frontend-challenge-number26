@@ -150,14 +150,50 @@
   color: white;
   font-weight: 200;
   text-transform: uppercase;
-  font-size: 30px; }
-  .wait span {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column; }
+  .wait span.text {
     line-height: 65px;
-    animation: blinker 1s linear infinite; }
+    animation: blinker 1s infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; }
+  .wait span.ball {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: white;
+    animation: 2s bounce linear infinite;
+    border-radius: 50%; }
+    .wait span.ball::before, .wait span.ball::after {
+      content: " ";
+      display: inline-block;
+      position: absolute;
+      background: white;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: auto;
+      top: 0;
+      bottom: 0; }
+    .wait span.ball::before {
+      left: -60px; }
+    .wait span.ball::after {
+      right: -60px; }
 
 @keyframes blinker {
   50% {
     opacity: 0.0; } }
+@keyframes bounce {
+  50% {
+    transform: scale(0.02) translate3d(50vw, 0, 0) rotate(180deg); }
+  100% {
+    transform: translate3d(100vw, 0, 0); } }
 body {
   font-family: Lato;
   color: #434343;

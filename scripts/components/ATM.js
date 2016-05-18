@@ -226,7 +226,7 @@ const ATM = React.createClass({
     //Render view according to current step
     render: function() {
         let view = '';
-        let waiting = this.state.waiting ? <div className='wait'><span>Please wait...</span></div> : '';
+        let waiting = this.state.waiting ? <div className='wait'><span className='ball'></span><span className="text">Please wait</span></div> : '';
         switch(this.state.currentStep.view) {
             case 'InsertCard':
                 view = <InsertCard hasCard={this.state.hasCard}/>;
